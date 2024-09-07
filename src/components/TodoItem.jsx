@@ -19,7 +19,7 @@ const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
       </div>
       <button
         onClick={() => deleteTodo(todo.id)}
-        className="text-red-500 hover:text-red-700 transition-colors duration-200"
+        className="text-red-500 hover:text-red-700 transition-colors duration-200 ml-2"
       >
         Delete
       </button>

@@ -44,6 +44,9 @@ const App = () => {
         toggleComplete={toggleComplete}
         deleteTodo={deleteTodo}
       />
+      <h1 className="text-sm font-bold mt-4 text-1st hover:text-4th duration-300">
+        Made By <a href="https://sayansenapati-1.web.app">Sayan Senapati</a>
+      </h1>
     </div>
   );
 };
