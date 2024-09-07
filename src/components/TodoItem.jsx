@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 const TodoItem = ({ todo, toggleComplete, deleteTodo }) => {
   return (
-    <li className="flex items-center justify-between p-2 bg-1st rounded-md shadow-sm">
+    <li className="flex items-center justify-between p-2 bg-1st rounded-md shadow-sm mb-2">
       <div className="flex items-center">
         <input
           type="checkbox"
