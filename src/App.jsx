@@ -1,29 +1,51 @@
-import { useState } from "react";
-import "./App.css";
+import { useState, useEffect } from "react";
+import TodoList from "./components/TodoList";
+import AddTodo from "./components/AddTodo";
 
-function App() {
-  const [ToDoList, setToDoList] = useState(0);
+const App = () => {
+  // Initialize todos from local storage if available, else empty array
+  const [todos, setTodos] = useState(() => {
+    const savedTodos = localStorage.getItem("todos");
+    return savedTodos ? JSON.parse(savedTodos) : [];
+  });
+
+  // Save todos to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
+  const addTodo = (title) => {
+    const newTodo = {
+      id: Date.now(),
+      title,
+      completed: false,
+    };
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  };
+
+  const toggleComplete = (id) => {
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: !todo.completed } : todo
+      )
+    );
+  };
+
+  const deleteTodo = (id) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
 
   return (
-    <>
-      <h1>ToDoList</h1>
-      <div className="card">
-        <button onClick={() => setToDoList((ToDoList) => ToDoList + 1)}>
-          List Count: {ToDoList}
-        </button>
-        <div className="card">
-          <input type="text" />
-          <button>Submit</button>
-        </div>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="app-container max-w-sm mx-auto flex flex-col items-center justify-center min-h-screen p-4">
+      <h1 className="text-4xl font-bold mb-4 text-5th">To-Do List</h1>
+      <AddTodo addTodo={addTodo} />
+      <TodoList
+        todos={todos}
+        toggleComplete={toggleComplete}
+        deleteTodo={deleteTodo}
+      />
+    </div>
   );
-}
+};
 
 export default App;
