@@ -1,0 +1,117 @@
+at first build your own web application using any of the framework and then acording to it the next step gonna run.
+
+for vite+react ->
+    npm install vite-plugin-pwa --save-dev 
+        for installing the required dependency to make it pogressive web app (PWA)
+
+    create manifest.json file inside public folder and make an favicon icon from (https://favicon.io)
+        then initialize acording to it -> 
+            example ->
+                {
+                  "short_name": "ToDoApp",
+                  "name": "ToDo List Application",
+                  "theme_color": "#000000",
+                  "background_color": "#ffffff",
+                  "display": "standalone",
+                  "start_url": ".",
+                  "orientation": "portrait",
+                  "icons": [
+                    {
+                        "src": "/favicon-16x16.png",
+                        "sizes": "16x16",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "/favicon-32x32.png",
+                        "sizes": "32x32",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "/apple-touch-icon.png",
+                        "sizes": "180x180",
+                        "type": "image/png"
+                    },
+                    {
+                        "src": "/android-chrome-192x192.png",
+                        "sizes": "192x192",
+                        "type": "image/png",
+                        "purpose": "maskable"
+                    },
+                    {
+                        "src": "/android-chrome-512x512.png",
+                        "sizes": "512x512",
+                        "type": "image/png",
+                        "purpose": "maskable"
+                    }
+                    ]
+                }
+            
+            edit vite.config.js file acording to the manifest.json file ->
+                example -> 
+                    import { defineConfig } from "vite";
+                    import react from "@vitejs/plugin-react";
+                    import { VitePWA } from "vite-plugin-pwa";
+
+                    export default defineConfig({
+                    plugins: [
+                        react(),
+                            VitePWA({
+                            registerType: "autoUpdate",
+                            manifest: {
+                            short_name: "ToDoApp",
+                            name: "ToDo List Application",
+                            description: "A to-do list application",
+                            background_color: "#ffffff",
+                            theme_color: "#000000",
+                            display: "standalone",
+                            start_url: ".",
+                            orientation: "portrait",
+                            icons: [
+                                {
+                                    src: "/favicon-16x16.png",
+                                    sizes: "16x16",
+                                    type: "image/png",
+                                },
+                                {
+                                    src: "/favicon-32x32.png",
+                                    sizes: "32x32",
+                                    type: "image/png",
+                                },
+                                {
+                                    src: "/apple-touch-icon.png",
+                                    sizes: "180x180",
+                                    type: "image/png",
+                                },
+                                {
+                                    src: "/android-chrome-192x192.png",
+                                    sizes: "192x192",
+                                    type: "image/png",
+                                    purpose: "maskable",
+                                },
+                                {
+                                    src: "/android-chrome-512x512.png", // 512px icon for splash screen
+                                    sizes: "512x512",
+                                    type: "image/png",
+                                    purpose: "maskable",
+                                },
+                            ],
+                            },
+                        }),
+                    ],
+                });
+
+            edit index.html file -> 
+                add this lines -> 
+                    <!-- logo for showing in different screens -->
+                    <link rel="icon" type="image/svg+xml" href="/todo.svg" />
+
+                    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+                    <meta name="theme-color" content="#000000" />
+
+                    <!-- manifest link for progressive web app -->
+                    <link rel="manifest" href="/manifest.json" />
+            
+            thats it ->
+
+then try it in crome lighthouse ->
+    if any thing else happened just search it on google or chatgpt for help
