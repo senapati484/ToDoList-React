@@ -8,8 +8,8 @@ export default defineConfig({
     VitePWA({
       registerType: "autoUpdate",
       manifest: {
-        short_name: "ToDoApp",
-        name: "ToDo List Application",
+        short_name: "ToDo",
+        name: "ToDo List",
         description: "A to-do list application",
         background_color: "#ffffff",
         theme_color: "#000000",
